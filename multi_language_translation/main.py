@@ -3,8 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from endpoint import router
 app = FastAPI()
 
-app.include_router(router, prefix="/api")
-
+app.include_router(router, prefix="/api", tags=["multi_language_translation"])
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Replace with frontend URL(s)

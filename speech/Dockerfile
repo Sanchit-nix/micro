@@ -1,34 +1,34 @@
-# Use Python base image
 FROM python:3.10-slim
 
 # Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-ENV COQUI_TOS_AGREED=1
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    COQUI_TOS_AGREED=1
 
-# Set working directory
-WORKDIR /app
-
-# Install system dependencies
+# Install build dependencies
 RUN apt-get update && apt-get install -y \
+    git build-essential \
+    gcc g++ \
     ffmpeg \
     libsndfile1 \
-    git \
-    && rm -rf /var/lib/apt/lists/*
+    curl \
+    rustc \
+    && apt-get clean
 
-# Install pip and upgrade
-RUN pip install --upgrade pip
+# Create app directory
+WORKDIR /app
 
-# Copy dependencies
+# Copy requirements first to leverage Docker cache
 COPY requirements.txt .
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
-# Copy source code
+# Copy the rest of the code
 COPY . .
 
-# Expose port
+# Expose the port
 EXPOSE 8000
 
 # Run the FastAPI app
