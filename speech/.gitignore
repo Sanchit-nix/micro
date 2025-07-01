@@ -1,3 +1,15 @@
-venv
+__pycache__/
+.*
+base.pt/
+venv/
+.python-version
+.env
 ds_models/
+*.pt
+*.pth
+*.bin
 *.model
+*.pyc
+.venv/
+*__init__.py
+*tar

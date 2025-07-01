@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+torch>=2.0.0
+transformers>=4.30.0
+sentencepiece>=0.1.99
+sacremoses>=0.0.53
+git+https://github.com/VarunGumma/IndicTransToolkit.git
+regex
+tqdm
+python-multipart
