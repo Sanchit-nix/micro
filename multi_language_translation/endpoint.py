@@ -25,9 +25,9 @@ async def translate_file(
     src_lang: str = Form(...),
     tgt_lang: str = Form(...)
 ):
-    input_filename = f"tmp/{uuid.uuid4().hex}_{file.filename}"
+    input_filename = f"input_files/{uuid.uuid4().hex}_{file.filename}"
     output_filename = input_filename.replace(".", "_translated.", 1)
-    os.makedirs("tmp", exist_ok=True)
+    os.makedirs("input_files", exist_ok=True)
 
     with open(input_filename, "wb") as f:
         shutil.copyfileobj(file.file, f)

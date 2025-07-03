@@ -1,11 +1,9 @@
-from speech_to_text import endpoint as stt_endpoint
-from text_to_speech import endpoint as tts_endpoint
+from endpoint import router
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
-app.include_router(stt_endpoint.router, prefix="/api",tags=['speech_to_text'])
-app.include_router(tts_endpoint.router, prefix="/api",tags=['text_to_speech'])
+app.include_router(router, prefix="/api",tags=['speech_to_text'])
 
 app.add_middleware(
     CORSMiddleware,

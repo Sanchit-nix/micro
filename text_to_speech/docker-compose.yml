@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  text_to_speech:
+    image: text_to_speech:030715
+    build: .
+    container_name: text_to_speech
+    ports:
+      - "8002:8002"
+    volumes:
+      - .:/app
+      - voice-storage:/app/Voice
+      - output-storage:/app/output
+    restart: always
+    networks:
+      - ai-network
+networks:
+  ai-network: 
+    driver: bridge
+volumes:
+  voice-storage:
+  output-storage:

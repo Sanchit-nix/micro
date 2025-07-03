@@ -1,12 +1,12 @@
 version: '3.9'
 
 services:
-  multi_language_translation:
-    image: multi_language_translation:030715
+  speech_to_text:
+    image: speech_to_text:030715
     build: .
-    container_name: multi_language_translation
+    container_name: speech_to_text
     ports:
-      - "8000:8000"
+      - "8001:8001"
     volumes:
       - .:/app
     restart: always

@@ -15,6 +15,7 @@ SPEAKER_WAVS = {
 class TTSService:
     def __init__(self, model_name="tts_models/multilingual/multi-dataset/xtts_v2"):
         self.tts = TTS(model_name=model_name, progress_bar=False).to("cpu")
+        self.model = TTS.load_model(model_name,download_root="ds_models/tts")
 
     def get_output_filename(base=None):
         os.makedirs("output", exist_ok=True)

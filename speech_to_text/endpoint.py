@@ -1,5 +1,5 @@
 from fastapi import APIRouter, UploadFile,File
-from speech_to_text.whisper_service import WhisperService
+from whisper_service import WhisperService
 
 router = APIRouter(tags=["speech_to_text"])
 whisper_service = WhisperService()

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import FileResponse
-from text_to_speech.tts_service import TTSService
+from tts_service import TTSService
 
 router = APIRouter(tags=["text_to_speech"])
 tts_service = TTSService()
