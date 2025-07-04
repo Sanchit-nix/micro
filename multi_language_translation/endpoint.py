@@ -6,7 +6,7 @@ import shutil
 import uuid
 import os
 
-router = APIRouter(tags=["translation"])
+router = APIRouter()
 translator = TranslationService()
 
 UPLOAD_DIR = Path("input_files")
