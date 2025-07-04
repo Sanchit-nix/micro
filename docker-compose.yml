@@ -3,7 +3,8 @@ version: '3.9'
 services:
   multi_language_translation:
     image: multi_language_translation:030715
-    build: .
+    build: 
+      context: multi_language_translation
     container_name: multi_language_translation
     ports:
       - "8000:8000"
@@ -15,7 +16,8 @@ services:
 
   speech_to_text:
     image: speech_to_text:030715
-    build: .
+    build: 
+      context: speech_to_text
     container_name: speech_to_text
     ports:
       - "8001:8001"
@@ -27,7 +29,8 @@ services:
 
   text_to_speech:
     image: text_to_speech:030715
-    build: .
+    build: 
+      context: text_to_speech
     container_name: text_to_speech
     ports:
       - "8002:8002"

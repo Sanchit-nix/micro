@@ -3,7 +3,9 @@ version: '3.9'
 services:
   multi_language_translation:
     image: multi_language_translation:030715
-    build: .
+    build: 
+      context: multi_language_translation
+      dockerfile: Dockerfile
     container_name: multi_language_translation
     ports:
       - "8000:8000"

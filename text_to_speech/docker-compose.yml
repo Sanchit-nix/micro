@@ -3,10 +3,12 @@ version: '3.9'
 services:
   text_to_speech:
     image: text_to_speech:030715
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
     container_name: text_to_speech
     ports:
-      - "8002:8002"
+      - "8000:8000"
     volumes:
       - .:/app
       - voice-storage:/app/Voice
@@ -14,9 +16,20 @@ services:
     restart: always
     networks:
       - ai-network
+    environment:
+      - PYTHONUNBUFFERED=1
+      - COQUI_TOS_AGREED=1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
 networks:
   ai-network: 
     driver: bridge
+
 volumes:
   voice-storage:
   output-storage:

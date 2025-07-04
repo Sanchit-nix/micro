@@ -5,6 +5,7 @@ services:
     image: speech_to_text:030715
     build: .
     container_name: speech_to_text
+    dockerfile: Dockerfile
     ports:
       - "8001:8001"
     volumes:

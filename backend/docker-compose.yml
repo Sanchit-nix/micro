@@ -1,0 +1,60 @@
+version: '3.9'
+
+services:
+  backend:
+    image: backend:030725
+    build: 
+      context: backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "9000:9000"
+    volumes:
+      - .:/app
+    restart: always
+    networks:
+      - ai-network
+    environment:
+      MONGODB_CONNECTION_STRING: mongodb://admin:adminpassword@mongodb:27017/aiaas
+      POSTGRES_CONNECTION_STRING: postgresql+asyncpg://user:password@postgres:5432/aiaas
+    depends_on:
+      - mongodb
+      - postgres
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: aiaas
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ai-network
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: adminpassword
+      MONGO_INITDB_DATABASE: aiaas
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - ai-network
+
+networks:
+  ai-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  mongodb_data:
