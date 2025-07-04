@@ -4,7 +4,7 @@ services:
   speech_to_text:
     image: speech_to_text:030715
     build: 
-      context: speech_to_text
+      context: .
       dockerfile: Dockerfile
     container_name: speech_to_text
     ports:
