@@ -3,9 +3,10 @@ version: '3.9'
 services:
   speech_to_text:
     image: speech_to_text:030715
-    build: .
+    build: 
+      context: speech_to_text
+      dockerfile: Dockerfile
     container_name: speech_to_text
-    dockerfile: Dockerfile
     ports:
       - "8001:8001"
     volumes:
